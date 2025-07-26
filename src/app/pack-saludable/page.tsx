@@ -42,6 +42,13 @@ export default function PackSaludablePage() {
     setMounted(true)
   }, [])
 
+  // Scroll to top when component mounts
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.scrollTo(0, 0)
+    }
+  }, [])
+
   // Obtener productos individuales para el pack
   const availableProducts = getIndividualProducts()
 

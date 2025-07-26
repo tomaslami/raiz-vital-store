@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation"
 import { ShoppingCart, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useCart } from "@/lib/cart-context"
-import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetTitle } from "@/components/ui/sheet"
 
 export default function Navbar() {
   const pathname = usePathname()
@@ -70,6 +70,9 @@ export default function Navbar() {
           </Link>
 
           <Sheet>
+              <SheetTitle>
+                
+              </SheetTitle>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="md:hidden hover:bg-[#16481D]/5">
                 <Menu className="h-6 w-6 text-[#16481D]" />
@@ -78,17 +81,11 @@ export default function Navbar() {
             </SheetTrigger>
             <SheetContent side="right" className="bg-[#FEF6EB] border-l border-[#16481D]/10 p-0">
               <div className="flex flex-col h-full">
-                <div className="flex justify-between items-center p-6 border-b border-[#16481D]/10">
+                <div className="flex items-center p-6 border-b border-[#16481D]/10">
                   <div className="flex items-center gap-2">
                     <Image src="/images/logo.png" alt="Raíz Vital" width={32} height={32} />
                     <span className="font-semibold text-[#16481D]">Raíz Vital</span>
                   </div>
-                  <SheetClose asChild>
-                    <Button variant="ghost" size="icon" className="text-[#16481D] hover:bg-[#16481D]/5">
-                      <X className="h-5 w-5" />
-                      <span className="sr-only">Cerrar menú</span>
-                    </Button>
-                  </SheetClose>
                 </div>
 
                 <nav className="flex flex-col p-6">
@@ -96,7 +93,9 @@ export default function Navbar() {
                     <SheetClose asChild key={link.href}>
                       <Link
                         href={link.href}
-                        className={`py-4 text-lg font-medium transition-colors hover:text-[#16481D] border-b border-[#16481D]/10 ${
+                        className={`py-4 text-lg font-medium transition-colors hover:text-[#16481D] ${
+                          link.label !== "Combos" ? "border-b border-[#16481D]/10" : ""
+                        } ${
                           isActive(link.href) ? "text-[#16481D]" : "text-[#16481D]/70"
                         } ${link.highlight ? "bg-[#16481D]/10 px-3 rounded-lg mb-2" : ""}`}
                       >
