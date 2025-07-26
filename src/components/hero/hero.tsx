@@ -53,7 +53,7 @@ export default function Hero() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="border-white text-white hover:bg-white/10 bg-transparent text-sm sm:text-base"
+                className="border-white text-white hover:bg-white/10 bg-transparent text-sm sm:text-base hover:text-white"
               >
                 <Link href="/combos" className="flex items-center justify-center gap-2">
                   <ShoppingCart className="h-4 w-4 sm:h-5 sm:w-5 shrink-0" />
@@ -76,8 +76,8 @@ export default function Hero() {
             <div className="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 bg-white/95 backdrop-blur-sm rounded-xl p-3 sm:p-4 shadow-lg">
               <div className="flex items-center gap-2 text-[#16481D]">
                 <Star className="h-4 w-4 sm:h-5 sm:w-5 fill-current shrink-0" />
-                <span className="font-semibold text-sm sm:text-base">4.9/5</span>
-                <span className="text-xs sm:text-sm">+200 clientes</span>
+                <span className="font-semibold text-sm sm:text-base">4.3/5</span>
+                <span className="text-xs sm:text-sm">+30 clientes</span>
               </div>
             </div>
           </div>

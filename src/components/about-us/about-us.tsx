@@ -3,7 +3,7 @@ import { Check, Heart, Leaf, Users } from "lucide-react"
 
 export default function AboutUsSection() {
   return (
-    <div className="container mx-auto px-6 md:px-8">
+    <div className="container mx-auto px-6 md:px-8 mb-12">
       <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
         <div className="space-y-8">
           <div className="space-y-6">
@@ -66,12 +66,7 @@ export default function AboutUsSection() {
               className="object-contain bg-white p-4"
             />
           </div>
-          <div className="absolute -bottom-6 -left-6 bg-white rounded-xl p-6 shadow-lg hidden sm:block">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-[#16481D] mb-1">+200</div>
-              <div className="text-sm text-gray-600">Familias satisfechas</div>
-            </div>
-          </div>
+          
         </div>
       </div>
     </div>
