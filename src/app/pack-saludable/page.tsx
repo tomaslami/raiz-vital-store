@@ -147,7 +147,7 @@ ${packItems
                 </div>
               </div>
 
-              <div className="bg-white/10 p-3 sm:p-4 rounded-lg mb-4 sm:mb-6">
+                            <div className="bg-white/10 p-3 sm:p-4 rounded-lg mb-4 sm:mb-6">
                 <div className="flex items-start gap-2 sm:gap-3">
                   <Info className="h-4 w-4 sm:h-5 sm:w-5 mt-0.5 flex-shrink-0" />
                   <div className="text-xs sm:text-sm">
@@ -160,73 +160,36 @@ ${packItems
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-                <div className="bg-white/10 p-3 sm:p-4 rounded-lg text-center">
-                  <div className="flex items-center justify-center gap-1 sm:gap-2 mb-1 sm:mb-2">
-                    <Percent className="h-4 w-4 sm:h-5 sm:w-5" />
-                    <span className="font-semibold text-base sm:text-lg">10%</span>
+
+
+              {/* Grid de descuentos para desktop */}
+              <div className="hidden lg:grid lg:grid-cols-3 gap-4">
+                <div className="bg-white/10 p-4 rounded-lg text-center">
+                  <div className="flex items-center justify-center gap-2 mb-2">
+                    <Percent className="h-5 w-5" />
+                    <span className="font-semibold text-lg">10%</span>
                   </div>
-                  <p className="text-xs sm:text-sm text-white/80">Desde $100.000</p>
+                  <p className="text-sm text-white/80">Desde $100.000</p>
                 </div>
-                <div className="bg-white/10 p-3 sm:p-4 rounded-lg text-center">
-                  <div className="flex items-center justify-center gap-1 sm:gap-2 mb-1 sm:mb-2">
-                    <Percent className="h-4 w-4 sm:h-5 sm:w-5" />
-                    <span className="font-semibold text-base sm:text-lg">13%</span>
+                <div className="bg-white/10 p-4 rounded-lg text-center">
+                  <div className="flex items-center justify-center gap-2 mb-2">
+                    <Percent className="h-5 w-5" />
+                    <span className="font-semibold text-lg">13%</span>
                   </div>
-                  <p className="text-xs sm:text-sm text-white/80">Desde $130.000</p>
+                  <p className="text-sm text-white/80">Desde $130.000</p>
                 </div>
-                <div className="bg-white/10 p-3 sm:p-4 rounded-lg text-center">
-                  <div className="flex items-center justify-center gap-1 sm:gap-2 mb-1 sm:mb-2">
-                    <Percent className="h-4 w-4 sm:h-5 sm:w-5" />
-                    <span className="font-semibold text-base sm:text-lg">15%</span>
+                <div className="bg-white/10 p-4 rounded-lg text-center">
+                  <div className="flex items-center justify-center gap-2 mb-2">
+                    <Percent className="h-5 w-5" />
+                    <span className="font-semibold text-lg">15%</span>
                   </div>
-                  <p className="text-xs sm:text-sm text-white/80">Desde $150.000</p>
+                  <p className="text-sm text-white/80">Desde $150.000</p>
                 </div>
               </div>
+                             
             </div>
 
-            {/* Niveles de descuento */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-[#16481D] flex items-center gap-2">
-                  <Star className="h-5 w-5" />
-                  Tu progreso hacia los descuentos
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {DISCOUNT_TIERS.map((tier) => (
-                    <div
-                      key={tier.minAmount}
-                      className={`p-4 rounded-lg border-2 transition-all ${
-                        subtotal >= tier.minAmount
-                          ? "border-green-500 bg-green-50"
-                          : subtotal >= tier.minAmount * 0.8
-                            ? "border-yellow-500 bg-yellow-50"
-                            : "border-gray-200 bg-gray-50"
-                      }`}
-                    >
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <span className="font-bold text-lg">{tier.discount}% OFF</span>
-                            {subtotal >= tier.minAmount && <Check className="h-5 w-5 text-green-600" />}
-                          </div>
-                          <p className="text-sm text-gray-600">Desde {formatPrice(tier.minAmount)}</p>
-                        </div>
-                        <div className="text-right">
-                          {subtotal >= tier.minAmount ? (
-                            <span className="text-green-600 font-semibold">¡Desbloqueado!</span>
-                          ) : (
-                            <span className="text-gray-500">Faltan {formatPrice(tier.minAmount - subtotal)}</span>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+           
 
             {/* Productos disponibles */}
             <Card>
@@ -238,33 +201,74 @@ ${packItems
               </CardHeader>
               <CardContent className="pt-0">
                 <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4">
-                  {availableProducts.map((product) => (
-                    <div key={product.id} className="border rounded-lg p-3 sm:p-4 hover:shadow-md transition-shadow">
-                      <div className="flex items-center gap-2 sm:gap-3 mb-3">
-                        <div className="relative w-10 h-10 sm:w-12 sm:h-12 bg-[#FEF6EB] rounded p-1 flex-shrink-0">
-                          <Image
-                            src={product.image || "/placeholder.svg"}
-                            alt={product.name}
-                            fill
-                            className="object-contain"
-                          />
+                  {availableProducts.map((product) => {
+                    // Buscar si el producto ya está en el pack
+                    const itemInPack = packItems.find(item => item.product.id === product.id)
+                    const quantity = itemInPack ? itemInPack.quantity : 0
+                    
+                    return (
+                      <div key={product.id} className="border rounded-lg p-3 sm:p-4 hover:shadow-md transition-shadow">
+                        <div className="flex flex-col gap-3 mb-3">
+                          {/* Imagen más grande centrada */}
+                          <div className="relative w-20 h-20 sm:w-24 sm:h-24 bg-[#FEF6EB] rounded-lg p-2 mx-auto flex-shrink-0">
+                            <Image
+                              src={product.image || "/placeholder.svg"}
+                              alt={product.name}
+                              fill
+                              className="object-contain"
+                            />
+                          </div>
+                          {/* Información del producto */}
+                          <div className="text-center">
+                            <h3 className="font-medium text-sm sm:text-base leading-tight mb-1">{product.name}</h3>
+                            <p className="text-xs text-gray-500 mb-2">{product.category}</p>
+                            <p className="text-[#16481D] font-semibold text-sm sm:text-base">{formatPrice(product.price)}</p>
+                          </div>
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <h3 className="font-medium text-xs sm:text-sm leading-tight truncate">{product.name}</h3>
-                          <p className="text-xs text-gray-500 mb-1 truncate">{product.category}</p>
-                          <p className="text-[#16481D] font-semibold text-xs sm:text-sm">{formatPrice(product.price)}</p>
-                        </div>
+                        
+                        {quantity === 0 ? (
+                          // Botón para agregar por primera vez
+                          <Button
+                            onClick={() => addToPack(product)}
+                            size="sm"
+                            className="w-full bg-[#16481D] hover:bg-[#16481D]/90 text-xs sm:text-sm h-8 sm:h-9"
+                          >
+                            <Plus className="mr-1 h-3 w-3" />
+                            Agregar al pack
+                          </Button>
+                        ) : (
+                          // Controles de cantidad cuando ya está en el pack
+                          <div className="flex items-center justify-between gap-2">
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => updateQuantity(product.id, quantity - 1)}
+                              className="h-8 w-8 p-0 border-[#16481D] text-[#16481D] hover:bg-[#16481D] hover:text-white"
+                            >
+                              <Minus className="h-3 w-3" />
+                            </Button>
+                            
+                            <div className="flex-1 text-center">
+                              <div className="bg-[#16481D]/10 rounded-lg py-1 px-2">
+                                <span className="text-xs sm:text-sm font-semibold text-[#16481D]">
+                                  {quantity} en pack
+                                </span>
+                              </div>
+                            </div>
+                            
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => updateQuantity(product.id, quantity + 1)}
+                              className="h-8 w-8 p-0 border-[#16481D] text-[#16481D] hover:bg-[#16481D] hover:text-white"
+                            >
+                              <Plus className="h-3 w-3" />
+                            </Button>
+                          </div>
+                        )}
                       </div>
-                      <Button
-                        onClick={() => addToPack(product)}
-                        size="sm"
-                        className="w-full bg-[#16481D] hover:bg-[#16481D]/90 text-xs sm:text-sm h-8 sm:h-9"
-                      >
-                        <Plus className="mr-1 h-3 w-3" />
-                        Agregar al pack
-                      </Button>
-                    </div>
-                  ))}
+                    )
+                  })}
                 </div>
               </CardContent>
             </Card>
@@ -346,11 +350,154 @@ ${packItems
                     </div>
 
                     <div className="border-t pt-3 sm:pt-4">
-                      <div className="flex justify-between font-semibold mb-3 sm:mb-4 text-sm sm:text-base">
+                      <div className="flex justify-between font-semibold mb-2 sm:mb-3 text-sm sm:text-base">
                         <span>Total final:</span>
                         <span className={isMinimumMet ? "text-[#16481D]" : "text-red-600"}>
                           {formatPrice(finalTotal)}
                         </span>
+                      </div>
+
+                      {/* Progress bar por segmentos */}
+                      <div className="mb-3 sm:mb-4">
+                        <div className="flex justify-between items-center mb-2">
+                          <span className="text-xs font-medium text-gray-700">Descuentos por volumen</span>
+                          {applicableDiscount && (
+                            <div className="bg-green-100 px-2 py-1 rounded-full">
+                              <span className="text-xs font-bold text-green-700">
+                                ¡{applicableDiscount.discount}% ACTIVADO!
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                        
+                        {/* Barra dividida en 3 segmentos */}
+                        <div className="flex gap-1 mb-2">
+                          {/* Segmento 1: $0 - $100k (10%) */}
+                          <div className="flex-1 relative">
+                            <div className="bg-gray-200 rounded-l-full h-3 overflow-hidden">
+                              <div 
+                                className={`h-full transition-all duration-700 ${
+                                  subtotal >= 100000 
+                                    ? 'bg-green-400' 
+                                    : 'bg-green-200'
+                                }`}
+                                style={{ 
+                                  width: `${Math.min((subtotal / 100000) * 100, 100)}%` 
+                                }}
+                              ></div>
+                            </div>
+                            <div className="text-center mt-1">
+                              <div className={`text-xs font-medium ${subtotal >= 100000 ? 'text-green-600' : 'text-gray-500'}`}>
+                                10% OFF
+                              </div>
+                              <div className="text-xs text-gray-400">$100k</div>
+                            </div>
+                          </div>
+
+                          {/* Segmento 2: $100k - $130k (13%) */}
+                          <div className="flex-1 relative">
+                            <div className="bg-gray-200 h-3 overflow-hidden">
+                              <div 
+                                className={`h-full transition-all duration-700 ${
+                                  subtotal >= 130000 
+                                    ? 'bg-green-500' 
+                                    : subtotal >= 100000 
+                                    ? 'bg-green-300'
+                                    : 'bg-gray-200'
+                                }`}
+                                style={{ 
+                                  width: subtotal >= 100000 
+                                    ? `${Math.min(((subtotal - 100000) / 30000) * 100, 100)}%`
+                                    : '0%'
+                                }}
+                              ></div>
+                            </div>
+                            <div className="text-center mt-1">
+                              <div className={`text-xs font-medium ${subtotal >= 130000 ? 'text-green-600' : subtotal >= 100000 ? 'text-green-500' : 'text-gray-500'}`}>
+                                13% OFF
+                              </div>
+                              <div className="text-xs text-gray-400">$130k</div>
+                            </div>
+                          </div>
+
+                          {/* Segmento 3: $130k - $150k (15%) */}
+                          <div className="flex-1 relative">
+                            <div className="bg-gray-200 rounded-r-full h-3 overflow-hidden">
+                              <div 
+                                className={`h-full transition-all duration-700 ${
+                                  subtotal >= 150000 
+                                    ? 'bg-green-700' 
+                                    : subtotal >= 130000 
+                                    ? 'bg-green-400'
+                                    : 'bg-gray-200'
+                                }`}
+                                style={{ 
+                                  width: subtotal >= 130000 
+                                    ? `${Math.min(((subtotal - 130000) / 20000) * 100, 100)}%`
+                                    : '0%'
+                                }}
+                              ></div>
+                            </div>
+                            <div className="text-center mt-1">
+                              <div className={`text-xs font-medium ${subtotal >= 150000 ? 'text-green-700' : subtotal >= 130000 ? 'text-green-600' : 'text-gray-500'}`}>
+                                15% OFF
+                              </div>
+                              <div className="text-xs text-gray-400">$150k</div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* Indicador de progreso actual */}
+                        <div className="text-center mb-2">
+                          <div className="text-xs text-gray-600">
+                            Progreso actual: <span className="font-semibold">{formatPrice(subtotal)}</span>
+                          </div>
+                        </div>
+                        
+                        {/* Mensaje de estado inteligente */}
+                        <div className="p-2 rounded-lg bg-gray-50">
+                          {subtotal >= 150000 ? (
+                            <div className="text-center">
+                              <p className="text-xs font-semibold text-green-700">
+                                🏆 ¡Máximo descuento alcanzado! 15% OFF
+                              </p>
+                              <p className="text-xs text-gray-600">
+                                Ahorras {formatPrice(discountAmount)} en tu compra
+                              </p>
+                            </div>
+                                                      ) : subtotal >= 130000 ? (
+                            <div className="text-center">
+                              <p className="text-xs font-semibold text-green-700">
+                                🎉 ¡13% de descuento activado!
+                              </p>
+                              <p className="text-xs text-green-800">
+                                Faltan {formatPrice(150000 - subtotal)} para 15% OFF
+                              </p>
+                            </div>
+                          ) : subtotal >= 100000 ? (
+                            <div className="text-center">
+                              <p className="text-xs font-semibold text-green-600">
+                                🎯 ¡10% de descuento activado!
+                              </p>
+                              <p className="text-xs text-green-700">
+                                Faltan {formatPrice(130000 - subtotal)} para 13% OFF
+                              </p>
+                            </div>
+                          ) : subtotal > 0 ? (
+                            <div className="text-center">
+                              <p className="text-xs font-medium text-green-600">
+                                📈 Faltan {formatPrice(100000 - subtotal)} para el primer descuento
+                              </p>
+                              <p className="text-xs text-gray-600">
+                                Completa el primer segmento para 10% OFF
+                              </p>
+                            </div>
+                          ) : (
+                            <p className="text-xs text-gray-500 text-center">
+                              Agrega productos para comenzar a desbloquear descuentos
+                            </p>
+                          )}
+                        </div>
                       </div>
 
                       {isMinimumMet && (
