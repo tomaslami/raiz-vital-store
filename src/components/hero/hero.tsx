@@ -73,7 +73,7 @@ export default function Hero() {
                 priority
               />
             </div>
-            <div className="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 bg-white/95 backdrop-blur-sm rounded-xl p-3 sm:p-4 shadow-lg">
+            <div className="absolute -bottom-4 -right-0  sm:-bottom-6 sm:-right-6 bg-white/95 backdrop-blur-sm rounded-xl p-3 sm:p-4 shadow-lg">
               <div className="flex items-center gap-2 text-[#16481D]">
                 <Star className="h-4 w-4 sm:h-5 sm:w-5 fill-current shrink-0" />
                 <span className="font-semibold text-sm sm:text-base">4.3/5</span>
@@ -83,7 +83,7 @@ export default function Hero() {
           </div>
         </div>
       </div>
-      <div className="absolute bottom-0 left-0 w-full h-12 sm:h-16 lg:h-20 bg-[#FEF6EB] rounded-t-[3rem] sm:rounded-t-[4rem] lg:rounded-t-[6rem]"></div>
+      <div className="absolute bottom-0 left-0 w-full h-12 sm:h-16 lg:h-20 bg-white rounded-t-[3rem] sm:rounded-t-[4rem] lg:rounded-t-[6rem] hidden lg:block"></div>
     </section>
   )
 }
