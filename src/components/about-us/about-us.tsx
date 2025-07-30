@@ -9,9 +9,18 @@ export default function AboutUsSection() {
           <div className="space-y-6">
             <h2 className="text-3xl md:text-4xl font-bold text-[#16481D]">Sobre Raíz Vital</h2>
             <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-              En Raíz Vital creemos que la alimentación saludable debe ser accesible para todos. Nacimos con la misión
-              de ofrecer productos naturales de la más alta calidad, directamente a tu hogar.
+              En Raíz Vital creemos que la alimentación saludable debe ser accesible para todos. Somos un emprendimiento familiar
+              que nació con la misión de ofrecer productos naturales de la más alta calidad, directamente a tu hogar.
             </p>
+            <div className="bg-[#16481D]/5 rounded-lg p-4">
+              <p className="text-sm text-gray-600 italic">
+                "Cada producto que seleccionamos pasa por nuestros estrictos controles de calidad. 
+                Trabajamos directamente con productores locales para garantizar frescura y origen."
+              </p>
+              <p className="text-xs text-[#16481D] font-semibold mt-2">
+                - Equipo Raíz Vital
+              </p>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">

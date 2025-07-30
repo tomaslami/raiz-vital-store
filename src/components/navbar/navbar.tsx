@@ -23,10 +23,10 @@ export default function Navbar() {
 
   const navLinks = [
     { href: "/", label: "Inicio" },
-    { href: "/#nosotros", label: "Sobre nosotros" },
-    { href: "/#como-funciona", label: "Cómo funciona" },
+    { href: "/productos", label: "Productos" },
     { href: "/combos", label: "Combos" },
     { href: "/pack-saludable", label: "🧺 Armá tu Pack", highlight: true },
+    { href: "/#faq", label: "Preguntas" },
   ]
 
   const isActive = (path: string) => {

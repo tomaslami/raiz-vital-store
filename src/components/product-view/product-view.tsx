@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { useToast } from "@/hooks/use-toast"
+
 import { useCart } from "@/lib/cart-context"
 import { formatPrice } from "@/lib/utils"
 import type { Product } from "@/lib/types"
@@ -20,7 +20,6 @@ interface ProductViewProps {
 export default function ProductView({ product }: ProductViewProps) {
   const [quantity, setQuantity] = useState(1)
   const [addedToCart, setAddedToCart] = useState(false)
-  const { toast } = useToast()
   const { addToCart } = useCart()
 
   const handleAddToCart = () => {
@@ -32,15 +31,6 @@ export default function ProductView({ product }: ProductViewProps) {
     ) // Pasar quantity como segundo parámetro
 
     setAddedToCart(true)
-    toast({
-      title: "Producto añadido al carrito",
-      description: `${quantity} x ${product.name} agregado correctamente`,
-      action: (
-        <Button variant="outline" size="sm" asChild>
-          <Link href="/carrito">Ver carrito</Link>
-        </Button>
-      ),
-    })
 
     // Reset the added state after 2 seconds
     setTimeout(() => {
@@ -49,10 +39,8 @@ export default function ProductView({ product }: ProductViewProps) {
   }
 
   const handleAddToWishlist = () => {
-    toast({
-      title: "Añadido a favoritos",
-      description: `${product.name} añadido a tu lista de favoritos`,
-    })
+    // Funcionalidad de favoritos - por implementar
+    console.log(`${product.name} añadido a favoritos`)
   }
 
   const decreaseQuantity = () => {
@@ -132,13 +120,44 @@ export default function ProductView({ product }: ProductViewProps) {
 
           <div className="mb-6">
             <p className="text-gray-700 mb-4">{product.description}</p>
-            <div className="flex items-center gap-2 text-sm text-[#16481D]">
-              <Check className="h-4 w-4" />
-              <span>Envío gratis en tu primera compra</span>
-            </div>
-            <div className="flex items-center gap-2 text-sm text-[#16481D] mt-1">
-              <Check className="h-4 w-4" />
-              <span>Producto 100% natural</span>
+            
+            {/* Weight info */}
+            {product.weight && (
+              <div className="mb-4">
+                <span className="text-sm font-medium text-gray-900">Presentación: </span>
+                <span className="text-sm text-gray-700">{product.weight}</span>
+              </div>
+            )}
+
+            {/* Benefits */}
+            {product.benefits && product.benefits.length > 0 && (
+              <div className="mb-4">
+                <h3 className="text-sm font-medium text-gray-900 mb-2">Beneficios:</h3>
+                <div className="space-y-1">
+                  {product.benefits.map((benefit, index) => (
+                    <div key={index} className="flex items-center gap-2 text-sm text-[#16481D]">
+                      <Check className="h-4 w-4 flex-shrink-0" />
+                      <span>{benefit}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* General benefits */}
+            <div className="space-y-1">
+              <div className="flex items-center gap-2 text-sm text-[#16481D]">
+                <Check className="h-4 w-4" />
+                <span>Envío gratis en compras +$100.000</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-[#16481D]">
+                <Check className="h-4 w-4" />
+                <span>Producto 100% natural</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-[#16481D]">
+                <Check className="h-4 w-4" />
+                <span>Sin conservantes ni aditivos</span>
+              </div>
             </div>
           </div>
 
@@ -226,9 +245,12 @@ export default function ProductView({ product }: ProductViewProps) {
           </div>
 
           <Tabs defaultValue="descripcion" className="mt-8">
-            <TabsList className="grid w-full grid-cols-3">
+            <TabsList className={`grid w-full ${product.nutritionalInfo ? 'grid-cols-4' : 'grid-cols-3'}`}>
               <TabsTrigger value="descripcion">Descripción</TabsTrigger>
               <TabsTrigger value="beneficios">Beneficios</TabsTrigger>
+              {product.nutritionalInfo && (
+                <TabsTrigger value="nutricion">Nutrición</TabsTrigger>
+              )}
               <TabsTrigger value="conservacion">Conservación</TabsTrigger>
             </TabsList>
             <TabsContent value="descripcion" className="pt-4">
@@ -246,6 +268,31 @@ export default function ProductView({ product }: ProductViewProps) {
                 )}
               </ul>
             </TabsContent>
+            {product.nutritionalInfo && (
+              <TabsContent value="nutricion" className="pt-4">
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <h4 className="font-semibold mb-3">Información nutricional por 100g:</h4>
+                  <div className="grid grid-cols-2 gap-4 text-sm">
+                    <div className="flex justify-between">
+                      <span>Calorías:</span>
+                      <span className="font-medium">{product.nutritionalInfo.calories} kcal</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Proteínas:</span>
+                      <span className="font-medium">{product.nutritionalInfo.protein} g</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Carbohidratos:</span>
+                      <span className="font-medium">{product.nutritionalInfo.carbs} g</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Grasas:</span>
+                      <span className="font-medium">{product.nutritionalInfo.fat} g</span>
+                    </div>
+                  </div>
+                </div>
+              </TabsContent>
+            )}
             <TabsContent value="conservacion" className="pt-4">
               <p>
                 Para mantener la frescura y calidad de tu {product.name}, guárdalo en un lugar fresco y seco,

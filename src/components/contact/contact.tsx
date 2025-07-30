@@ -4,12 +4,11 @@ import type React from "react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { useToast } from "@/hooks/use-toast"
+
 
 export default function Contact() {
   const [email, setEmail] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const { toast } = useToast()
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -17,10 +16,7 @@ export default function Contact() {
 
     // Simulate API call
     setTimeout(() => {
-      toast({
-        title: "¡Suscripción exitosa!",
-        description: "Gracias por suscribirte a nuestro newsletter.",
-      })
+      alert("¡Suscripción exitosa! Gracias por suscribirte a nuestro newsletter.")
       setEmail("")
       setIsSubmitting(false)
     }, 1000)

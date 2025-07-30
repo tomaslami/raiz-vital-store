@@ -25,7 +25,7 @@ export default function CartPage() {
   }
 
   const subtotal = cart.reduce((total, item) => total + item.price * item.quantity, 0)
-  const shipping = 0 // Free shipping
+  const shipping = subtotal >= 100000 ? 0 : 5000 // Envío gratis a partir de $100.000
   const total = subtotal + shipping
 
   return (
@@ -121,8 +121,22 @@ export default function CartPage() {
                   </div>
                   <div className="flex justify-between">
                     <span>Envío</span>
-                    <span className="text-green-600">Gratis</span>
+                    {shipping === 0 ? (
+                      <span className="text-green-600">Gratis ✅</span>
+                    ) : (
+                      <span>{formatPrice(shipping)}</span>
+                    )}
                   </div>
+                  {subtotal < 100000 && (
+                    <div className="text-xs text-gray-600">
+                      Faltan {formatPrice(100000 - subtotal)} para envío gratis y descuentos
+                    </div>
+                  )}
+                  {subtotal >= 100000 && (
+                    <div className="text-xs text-green-600">
+                      ✅ Envío gratis y descuentos activados
+                    </div>
+                  )}
                 </div>
 
                 <div className="border-t pt-4 mb-6">

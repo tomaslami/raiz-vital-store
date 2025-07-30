@@ -8,6 +8,7 @@ import { CartProvider } from "@/lib/cart-context"
 import { PackProvider } from "@/lib/pack-context"
 import Navbar from "@/components/navbar/navbar"
 import Footer from "@/components/footer/footer"
+import FloatingCart from "@/components/floating-cart/floating-cart"
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -35,6 +36,7 @@ export default function RootLayout({
               <Navbar />
               {children}
               <Footer />
+              <FloatingCart />
               <Toaster />
             </PackProvider>
           </CartProvider>

@@ -12,29 +12,33 @@ export default function Hero() {
           <div className="space-y-6 lg:space-y-8 text-center lg:text-left">
             <div className="space-y-4 lg:space-y-6">
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
-                Alimentación saludable{" "}
+                Comé natural.{" "}
                 <span className="text-[#FEF6EB] bg-white/10 px-2 py-1 rounded-lg inline-block text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl">
-                  a tu medida
+                  Comprá inteligente.
                 </span>
               </h1>
               <p className="text-base sm:text-lg md:text-xl lg:text-xl text-white/95 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                Elegí entre nuestros combos prediseñados o armá tu pack personalizado con descuentos de hasta 15%.
-                Productos naturales de calidad, directo a tu casa.
+                Productos saludables seleccionados. Armá tu combo con <strong>envío gratis desde $100.000</strong> y <strong>descuentos automáticos</strong>.
+                Hasta 15% OFF en compras grandes.
               </p>
             </div>
 
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 lg:gap-6 text-sm">
               <div className="flex items-center gap-2 bg-white/10 px-3 py-2 rounded-full">
                 <Truck className="h-4 w-4 shrink-0" />
-                <span>Envío gratis</span>
-              </div>
-              <div className="flex items-center gap-2 bg-white/10 px-3 py-2 rounded-full">
-                <Shield className="h-4 w-4 shrink-0" />
-                <span>100% natural</span>
+                <span>Envío gratis +$100k</span>
               </div>
               <div className="flex items-center gap-2 bg-white/10 px-3 py-2 rounded-full">
                 <Percent className="h-4 w-4 shrink-0" />
                 <span>Hasta 15% OFF</span>
+              </div>
+              <div className="flex items-center gap-2 bg-white/10 px-3 py-2 rounded-full">
+                <Package className="h-4 w-4 shrink-0" />
+                <span>Descuentos automáticos</span>
+              </div>
+              <div className="flex items-center gap-2 bg-white/10 px-3 py-2 rounded-full">
+                <Shield className="h-4 w-4 shrink-0" />
+                <span>100% natural</span>
               </div>
             </div>
 

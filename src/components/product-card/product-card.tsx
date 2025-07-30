@@ -7,7 +7,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { ShoppingCart, Heart, Check, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useToast } from "@/hooks/use-toast"
+
 import { useCart } from "@/lib/cart-context"
 import { formatPrice } from "@/lib/utils"
 import type { Product } from "@/lib/types"
@@ -18,18 +18,12 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   const { addToCart } = useCart()
-  const { toast } = useToast()
   const [isAddingToCart, setIsAddingToCart] = useState(false)
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault() // Evitar navegación al hacer clic en el botón
     setIsAddingToCart(true)
     addToCart(product, 1)
-
-    toast({
-      title: "Producto añadido",
-      description: `${product.name} se ha añadido al carrito`,
-    })
 
     setTimeout(() => {
       setIsAddingToCart(false)
@@ -38,10 +32,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   const handleAddToWishlist = (e: React.MouseEvent) => {
     e.preventDefault() // Evitar navegación al hacer clic en el botón
-    toast({
-      title: "Añadido a favoritos",
-      description: `${product.name} se ha añadido a tu lista de favoritos`,
-    })
+    console.log(`${product.name} añadido a favoritos`)
   }
 
   return (
