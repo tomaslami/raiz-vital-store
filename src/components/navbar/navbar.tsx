@@ -25,8 +25,8 @@ export default function Navbar() {
     { href: "/", label: "Inicio" },
     { href: "/productos", label: "Productos" },
     { href: "/combos", label: "Combos" },
-    { href: "/pack-saludable", label: "🧺 Armá tu Pack", highlight: true },
     { href: "/#faq", label: "Preguntas" },
+    { href: "/pack-saludable", label: "🧺 Armá tu Pack", highlight: true },
   ]
 
   const isActive = (path: string) => {

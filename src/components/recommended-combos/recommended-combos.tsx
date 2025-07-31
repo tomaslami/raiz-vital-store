@@ -12,7 +12,7 @@ const recommendedCombos = [
     id: "combo-desayuno-saludable",
     name: "Desayuno Saludable",
     description: "Perfecto para empezar el día con energía. Incluye almendras, granola casera y miel orgánica.",
-    image: "/images/combo-desayuno.png",
+    image: "/combos/Combo.png",
     originalPrice: 45000,
     discountedPrice: 38000,
     savings: 7000,
@@ -24,7 +24,7 @@ const recommendedCombos = [
     id: "pack-snack-power",
     name: "Pack Snack Power",
     description: "Para cuando necesitás energía rápida. Mix de frutos secos seleccionados para deportistas.",
-    image: "/images/pack-snack.png",
+    image: "/combos/Combo.png",
     originalPrice: 52000,
     discountedPrice: 42000,
     savings: 10000,
@@ -36,7 +36,7 @@ const recommendedCombos = [
     id: "caja-gourmet",
     name: "Caja Gourmet",
     description: "La selección más exquisita para quienes buscan lo mejor. Productos premium cuidadosamente elegidos.",
-    image: "/images/caja-gourmet.png",
+    image: "/combos/Combo.png",
     originalPrice: 75000,
     discountedPrice: 59000,
     savings: 16000,
@@ -66,7 +66,7 @@ export default function RecommendedCombos() {
               className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 group"
             >
               {/* Image */}
-              <div className="relative h-48 overflow-hidden">
+              <div className="relative h-56 overflow-hidden">
                 <Image
                   src={combo.image}
                   alt={combo.name}
